@@ -1,0 +1,11 @@
+{
+  "name": "teletype",
+  "version": "0.1.0",
+  "description": "A simple Telnet client.",
+  "keywords": [
+    "telnet"
+  ],
+  "license": "ISC",
+  "author": "Jakob Krigovsky <jakob@krigovsky.com>",
+  "repository": "sonicdoe/teletype"
+}
