@@ -9,9 +9,10 @@
   "author": "Jakob Krigovsky <jakob@krigovsky.com>",
   "repository": "sonicdoe/teletype",
   "scripts": {
-    "test": "standard"
+    "test": "standard && ava"
   },
   "devDependencies": {
+    "ava": "^0.17.0",
     "standard": "^8.6.0"
   }
 }
