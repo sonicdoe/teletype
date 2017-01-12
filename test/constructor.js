@@ -22,3 +22,9 @@ test('defaults to port 23', t => {
   const client = teletype('localhost')
   t.is(client.port, 23)
 })
+
+test('throws a TypeError if host is not a string', t => {
+  t.throws(() => {
+    teletype(23, 23)
+  }, TypeError)
+})
