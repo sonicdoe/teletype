@@ -6,6 +6,10 @@ class Teletype {
       throw new TypeError('host must be a string.')
     }
 
+    if (typeof port !== 'number') {
+      throw new TypeError('port must be a number.')
+    }
+
     this.host = host
     this.port = port
   }

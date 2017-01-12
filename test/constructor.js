@@ -28,3 +28,9 @@ test('throws a TypeError if host is not a string', t => {
     teletype(23, 23)
   }, TypeError)
 })
+
+test('throws a TypeError if port is not a number', t => {
+  t.throws(() => {
+    teletype('localhost', 'localhost')
+  }, TypeError)
+})
