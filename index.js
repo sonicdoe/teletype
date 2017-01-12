@@ -1,7 +1,7 @@
 'use strict'
 
 class Teletype {
-  constructor (host, port) {
+  constructor (host, port = 23) {
     this.host = host
     this.port = port
   }

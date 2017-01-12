@@ -17,3 +17,8 @@ test('sets port', t => {
   const client = teletype('localhost', 2323)
   t.is(client.port, 2323)
 })
+
+test('defaults to port 23', t => {
+  const client = teletype('localhost')
+  t.is(client.port, 23)
+})
