@@ -25,6 +25,11 @@ class Teletype {
       if (!this._client) {
         const { host, port } = this
         this._client = net.connect({ host, port })
+
+        // “The TELNET protocol is based upon the notion of a virtual teletype,
+        // employing a 7-bit ASCII character set.”
+        // See https://tools.ietf.org/html/rfc206#page-2.
+        this._client.setEncoding('ascii')
       }
 
       this._client.once('error', reject)
