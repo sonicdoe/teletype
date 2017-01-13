@@ -88,6 +88,13 @@ class Teletype {
       })
     })
   }
+
+  close () {
+    return this._lazyConnect().then(client => {
+      client.end()
+      client.destroy()
+    })
+  }
 }
 
 module.exports = (...args) => {

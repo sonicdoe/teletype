@@ -16,6 +16,11 @@ module.exports = () => {
           c.write(str + TELNET_EOL)
         }
       })
+
+      c.on('error', err => {
+        // ECONNRESET is to be expected during `close` tests.
+        if (err.code !== 'ECONNRESET') throw err
+      })
     })
 
     server.listen(0)
