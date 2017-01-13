@@ -2,6 +2,10 @@
 
 const net = require('net')
 
+// “The Telnet protocol defines the sequence CR LF to mean "end-of-line".”
+// See https://tools.ietf.org/html/rfc1123#page-21.
+const TELNET_EOL = '\r\n'
+
 class Teletype {
   constructor (host, port = 23) {
     if (typeof host !== 'string') {
@@ -37,6 +41,28 @@ class Teletype {
       this._client.once('connect', () => {
         this._client.removeListener('error', reject)
         resolve(this._client)
+      })
+    })
+  }
+
+  readUntil (match) {
+    return this._lazyConnect().then(client => {
+      return new Promise((resolve, reject) => {
+        const client = this._client
+
+        const onData = data => {
+          const lines = data.split(TELNET_EOL)
+
+          for (const line of lines) {
+            if (match.test(line)) {
+              resolve(line)
+              client.removeListener('data', onData)
+              break
+            }
+          }
+        }
+
+        client.on('data', onData)
       })
     })
   }
