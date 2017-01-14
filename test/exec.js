@@ -34,3 +34,8 @@ test('returns matched line', t => {
     t.is(response, 'foo')
   })
 })
+
+test('rejects a TypeError if command is not a string', t => {
+  const client = teletype(t.context.host, t.context.port)
+  t.throws(client.exec(23), TypeError)
+})

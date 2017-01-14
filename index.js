@@ -46,6 +46,10 @@ class Teletype {
   }
 
   exec (command, match) {
+    if (typeof command !== 'string') {
+      return Promise.reject(new TypeError('command must be a string.'))
+    }
+
     return this._lazyConnect().then(client => {
       let promise
 
