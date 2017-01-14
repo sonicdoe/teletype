@@ -1,5 +1,8 @@
 # Teletype
 
+[![Node.js package](https://img.shields.io/npm/v/teletype.svg)](https://www.npmjs.com/package/teletype)
+[![Build status](https://img.shields.io/travis/sonicdoe/teletype.svg)](https://travis-ci.org/sonicdoe/teletype)
+
 > A simple Telnet client.
 
 ## Installation
