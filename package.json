@@ -7,6 +7,9 @@
   ],
   "license": "ISC",
   "author": "Jakob Krigovsky <jakob@krigovsky.com>",
+  "files": [
+    "index.js"
+  ],
   "repository": "sonicdoe/teletype",
   "scripts": {
     "test": "standard && ava"
