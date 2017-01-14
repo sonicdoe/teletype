@@ -7,7 +7,9 @@ const net = require('net')
 const TELNET_EOL = '\r\n'
 
 class Teletype {
-  constructor (host, port = 23) {
+  constructor (host, port) {
+    if (!port) port = 23
+
     if (typeof host !== 'string') {
       throw new TypeError('host must be a string.')
     }
@@ -27,8 +29,10 @@ class Teletype {
       }
 
       if (!this._client) {
-        const { host, port } = this
-        this._client = net.connect({ host, port })
+        this._client = net.connect({
+          host: this.host,
+          port: this.port
+        })
 
         // “The TELNET protocol is based upon the notion of a virtual teletype,
         // employing a 7-bit ASCII character set.”
@@ -97,6 +101,6 @@ class Teletype {
   }
 }
 
-module.exports = (...args) => {
-  return new Teletype(...args)
+module.exports = (host, port) => {
+  return new Teletype(host, port)
 }
