@@ -18,6 +18,8 @@ class Teletype {
 
   _lazyConnect () {
     return new Promise((resolve, reject) => {
+      if (this._client) return resolve(this._client)
+
       const { host, port } = this
       this._client = net.connect({ host, port })
 

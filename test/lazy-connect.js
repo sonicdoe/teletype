@@ -1,6 +1,9 @@
 'use strict'
 
 import test from 'ava'
+import net from 'net'
+import proxyquire from 'proxyquire'
+import sinon from 'sinon'
 import createServer from './helpers/server'
 import teletype from '..'
 
@@ -16,6 +19,23 @@ test.cb('connects to host', t => {
   const client = teletype(t.context.host, t.context.port)
   t.context.server.once('connection', () => t.end())
   client._lazyConnect()
+})
+
+test('it only connects once', t => {
+  const spy = sinon.spy(net.connect)
+
+  const teletype = proxyquire('..', {
+    net: {
+      connect: spy
+    }
+  })
+
+  const client = teletype(t.context.host, t.context.port)
+  const promises = [client._lazyConnect(), client._lazyConnect()]
+
+  return Promise.all(promises).then(() => {
+    t.true(spy.calledOnce)
+  })
 })
 
 test('resolves socket', t => {

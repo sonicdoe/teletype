@@ -13,6 +13,8 @@
   },
   "devDependencies": {
     "ava": "^0.17.0",
+    "proxyquire": "^1.7.10",
+    "sinon": "^1.17.7",
     "standard": "^8.6.0"
   }
 }
