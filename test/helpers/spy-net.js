@@ -5,8 +5,8 @@ module.exports = (sandbox, method) => {
   const netStub = {}
 
   const spyPromise = new Promise((resolve, reject) => {
-    netStub.connect = (...args) => {
-      const socket = net.connect(...args)
+    netStub.connect = (options) => {
+      const socket = net.connect(options)
       const spy = sandbox.spy(socket, method)
 
       resolve(spy)

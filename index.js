@@ -97,6 +97,6 @@ class Teletype {
   }
 }
 
-module.exports = (...args) => {
-  return new Teletype(...args)
+module.exports = (host, port) => {
+  return new Teletype(host, port)
 }
