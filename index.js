@@ -45,6 +45,20 @@ class Teletype {
     })
   }
 
+  exec (command, match) {
+    return this._lazyConnect().then(client => {
+      let promise
+
+      if (match) {
+        promise = this.readUntil(match)
+      }
+
+      client.write(command + TELNET_EOL)
+
+      if (match) return promise
+    })
+  }
+
   readUntil (match) {
     if (!(match instanceof RegExp)) {
       return Promise.reject(new TypeError('match must be a RegExp.'))

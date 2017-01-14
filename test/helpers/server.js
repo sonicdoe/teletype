@@ -9,6 +9,13 @@ module.exports = () => {
     const server = net.createServer(c => {
       c.setEncoding('ascii')
       c.write('Hello, world!' + TELNET_EOL)
+
+      c.on('data', data => {
+        if (/^echo /.test(data)) {
+          const str = data.substring('echo '.length)
+          c.write(str + TELNET_EOL)
+        }
+      })
     })
 
     server.listen(0)
