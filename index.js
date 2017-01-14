@@ -7,7 +7,9 @@ const net = require('net')
 const TELNET_EOL = '\r\n'
 
 class Teletype {
-  constructor (host, port = 23) {
+  constructor (host, port) {
+    if (!port) port = 23
+
     if (typeof host !== 'string') {
       throw new TypeError('host must be a string.')
     }
