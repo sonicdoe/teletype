@@ -46,6 +46,10 @@ class Teletype {
   }
 
   readUntil (match) {
+    if (!(match instanceof RegExp)) {
+      return Promise.reject(new TypeError('match must be a RegExp.'))
+    }
+
     return this._lazyConnect().then(client => {
       return new Promise((resolve, reject) => {
         const client = this._client

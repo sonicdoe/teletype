@@ -19,3 +19,8 @@ test('returns matched line', t => {
     t.is(response, 'Hello, world!')
   })
 })
+
+test('rejects a TypeError if match is not a RegExp', t => {
+  const client = teletype(t.context.host, t.context.port)
+  t.throws(client.readUntil(23), TypeError)
+})
