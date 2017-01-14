@@ -38,6 +38,15 @@ test('it only connects once', t => {
   })
 })
 
+test('it only resolves when connected', t => {
+  const client = teletype(t.context.host, t.context.port)
+  const promises = [client._lazyConnect(), client._lazyConnect()]
+
+  return Promise.race(promises).then(client => {
+    t.is(client.connecting, false)
+  })
+})
+
 test('resolves socket', t => {
   const client = teletype(t.context.host, t.context.port)
 
