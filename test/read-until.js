@@ -20,6 +20,15 @@ test('returns matched line', t => {
   })
 })
 
+test('times out', async t => {
+  const client = teletype(t.context.host, t.context.port)
+  await client._lazyConnect()
+  client.timeout = 1
+
+  const error = await t.throws(client.readUntil(/qux/i))
+  t.is(error.code, 'ETIMEDOUT')
+})
+
 test('rejects a TypeError if match is not a RegExp', t => {
   const client = teletype(t.context.host, t.context.port)
   t.throws(client.readUntil(23), TypeError)

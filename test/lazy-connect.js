@@ -67,6 +67,12 @@ test('assigns socket to _client property', t => {
   })
 })
 
+test('times out', async t => {
+  const client = teletype(t.context.host, t.context.port, { timeout: 1 })
+  const error = await t.throws(client._lazyConnect())
+  t.is(error.code, 'ETIMEDOUT')
+})
+
 test('passes on any errors', t => {
   const client = teletype('teletype.invalid')
   t.throws(client._lazyConnect(), /ENOTFOUND/)

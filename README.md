@@ -25,7 +25,7 @@ client.exec('?PWR', /PWR[01]/)
 
 ### API
 
-#### teletype(host[, port])
+#### teletype(host[, port, options])
 
 Creates a Teletype client.
 
@@ -41,6 +41,19 @@ Type: `Number`
 Default: `23`
 
 The port to connect to.
+
+##### options
+
+Type: `Object`
+
+###### timeout
+
+Type: `Number` or `false`  
+Default: `false`
+
+The number of milliseconds before a call is considered to be timed out. This
+applies to the initial connection, `readUntil()`, and `exec()` if called with
+`match`. `exec()` without `match` and `close()` will never time out.
 
 #### client.exec(command[, match])
 
@@ -75,8 +88,9 @@ and
 
 ### Errors
 
-If a required argument is missing, Teletype will reject a `TypeError`. Any
-other error will be the same as emitted by
+If a required argument is missing, Teletype will reject a `TypeError`.
+If a call times out, it will reject an error with the code `ETIMEDOUT`.
+Any other error will be the same as emitted by
 [Node.js’s `net`](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net_event_error_1).
 
 ## Acknowledgments
