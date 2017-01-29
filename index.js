@@ -93,7 +93,6 @@ class Teletype {
 
     return this._lazyConnect().then(client => {
       return new Promise((resolve, reject) => {
-        const client = this._client
         let timeout
 
         const onData = data => {
