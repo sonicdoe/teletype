@@ -7,6 +7,8 @@ import sinon from 'sinon'
 import createServer from './helpers/server'
 import teletype from '..'
 
+const testSkipNode4 = (/^v4/.test(process.version) ? test.skip : test)
+
 test.beforeEach(t => {
   return createServer().then(server => {
     t.context.server = server
@@ -38,11 +40,9 @@ test('it only connects once', t => {
   })
 })
 
-test('it only resolves when connected', t => {
-  // Skip test in Node.js v4 because socket.connecting is only available in
-  // Node.js v6.1.0 and later.
-  if (/^v4/.test(process.version)) return
-
+// Skip test in Node.js v4 because socket.connecting is only available in
+// Node.js v6.1.0 and later.
+testSkipNode4('it only resolves when connected', t => {
   const client = teletype(t.context.host, t.context.port)
   const promises = [client._lazyConnect(), client._lazyConnect()]
 
