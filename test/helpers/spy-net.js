@@ -1,6 +1,6 @@
 'use strict'
 
-const net = require('net')
+import net from 'net'
 
 module.exports = (sandbox, method) => {
   const netStub = {}

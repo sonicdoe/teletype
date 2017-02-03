@@ -1,6 +1,6 @@
 'use strict'
 
-const net = require('net')
+import net from 'net'
 
 const TELNET_EOL = '\r\n'
 
