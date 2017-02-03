@@ -1,7 +1,8 @@
 'use strict'
 
+const net = require('net')
+
 module.exports = (sandbox, method) => {
-  const net = require('net')
   const netStub = {}
 
   const spyPromise = new Promise((resolve, reject) => {
